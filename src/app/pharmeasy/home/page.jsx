@@ -10,6 +10,9 @@ import FrequentlyBookedLabTests from "./FrequentlyBookedLabTests/FrequentlyBooke
 
 
 import WellnessEssentials from "./WellnessEssentials/WellnessEssentials";
+import FeaturedBrands from "./FeaturedBrands/FeaturedBrands";
+import DealsoftheDay from "./DealsoftheDay/DealsoftheDay";
+import IntheSpotlights from "./IntheSpotlight/IntheSpotlight";
 
 export default function HomePage() {
     return (
@@ -22,6 +25,9 @@ export default function HomePage() {
             <TrendingNearYou />
             <FrequentlyBookedLabTests />
             <WellnessEssentials />
+            <FeaturedBrands />
+            <DealsoftheDay />
+            <IntheSpotlights />
 
 
 
