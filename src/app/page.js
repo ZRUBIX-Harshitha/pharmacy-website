@@ -1,13 +1,13 @@
 import Image from "next/image";
 import React from "react";
-import PharmacyPage from "./pharmeasy/page";
+import HomePage from "./pharmacy/home/page";
 
 
 export default function Page() {
   return (
     <>
-      <PharmacyPage />
 
+      <HomePage />
 
     </>
   );
