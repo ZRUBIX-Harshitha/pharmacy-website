@@ -1,6 +1,7 @@
 "use client";
 import React from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useCart } from '../../../../context/CartContext';
 
 
@@ -39,26 +40,38 @@ export default function CartDrawer() {
                 {/* Cart Items List */}
                 <div className="flex-1 overflow-y-auto p-4 space-y-4">
                     {cartItems.length === 0 ? (
-                        <div className="h-full flex flex-col items-center justify-center text-center space-y-4 text-gray-500">
-                            <div className="w-40 h-40 relative opacity-50">
-                                <Image
-                                    src="https://assets.pharmeasy.in/web-assets/images/cart_empty_state.png?dim=256x0" // Placeholder or use provided asset if any, using generic empty cart idea
-                                    // Actually better to use an SVG or just text if no image provided for empty state.
-                                    // I'll use a generic SVG for now or try to match style.
-                                    alt="Empty Cart"
-                                    fill
-                                    className="object-contain"
-                                    unoptimized
-                                // src="https://assets.pharmeasy.in/web-assets/images/empty_cart.png"
-                                />
+                        <div className="h-full flex flex-col items-center justify-center text-center space-y-6 text-gray-500 animate-fadeIn">
+                            <div className="w-48 h-48 relative flex items-center justify-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" className="w-full h-full text-gray-200">
+                                    <circle cx="100" cy="100" r="80" fill="#f8f9fa" />
+                                    <path fill="#e9ecef" d="M100 180c-44.18 0-80-35.82-80-80s35.82-80 80-80 80 35.82 80 80-35.82 80-80 80z" />
+                                    <path fill="#dee2e6" d="M65 85h70l-10 60H75z" />
+                                    <path fill="#ced4da" d="M70 65h60v20H70z" />
+                                    <circle cx="80" cy="155" r="8" fill="#adb5bd" />
+                                    <circle cx="120" cy="155" r="8" fill="#adb5bd" />
+                                </svg>
+                                <div className="absolute inset-0 flex items-center justify-center">
+                                    <Image
+                                        src="https://assets.pharmeasy.in/web-assets/images/cart_empty_state.png?dim=256x0"
+                                        alt="Empty Cart"
+                                        width={200}
+                                        height={200}
+                                        className="object-contain drop-shadow-md"
+                                        unoptimized
+                                    />
+                                </div>
                             </div>
-                            <p className="text-lg font-medium text-[#30363c]">Your cart is empty!</p>
-                            <p className="text-sm">Add items to it now.</p>
+
+                            <div className="flex flex-col items-center gap-2">
+                                <h3 className="text-xl font-bold text-gray-800">Your Cart is Empty</h3>
+                                <p className="text-gray-500 max-w-[250px] leading-relaxed">Looks like you haven't added anything to your cart yet.</p>
+                            </div>
+
                             <button
                                 onClick={closeCart}
-                                className="mt-4 bg-[#a7358d] text-white px-6 py-2 rounded-md font-bold hover:bg-[#8e2d78] transition-colors"
+                                className="mt-2 bg-[#a7358d] text-white px-8 py-3 rounded-lg font-bold hover:bg-[#8e2d78] transition-all shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
                             >
-                                Shop Now
+                                Start Shopping
                             </button>
                         </div>
                     ) : (
@@ -137,12 +150,12 @@ export default function CartDrawer() {
                                 <span>₹{cartTotal.toFixed(2)}</span>
                             </div>
                         </div>
-                        <button className="w-full bg-[#a7358d] hover:bg-[#8e2d78] text-white font-bold py-3.5 rounded-lg transition-colors flex items-center justify-center gap-2 shadow-lg">
+                        <Link href="/cart" onClick={closeCart} className="w-full bg-[#a7358d] hover:bg-[#8e2d78] text-white font-bold py-3.5 rounded-lg transition-colors flex items-center justify-center gap-2 shadow-lg">
                             Proceed to Buy
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-5 h-5">
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
                             </svg>
-                        </button>
+                        </Link>
                     </div>
                 )}
             </div>

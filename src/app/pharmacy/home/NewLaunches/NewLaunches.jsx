@@ -3,6 +3,7 @@ import React, { useRef, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useCart } from '../../../../context/CartContext';
+import { useWishlist } from '../../../../context/WishlistContext';
 
 const newLaunches = [
     {
@@ -100,6 +101,7 @@ const newLaunches = [
 
 export default function NewLaunches() {
     const { addToCart, openCart } = useCart();
+    const { addToWishlist, isInWishlist } = useWishlist();
     const scrollContainerRef = useRef(null);
     const [selectedProduct, setSelectedProduct] = useState(null);
     const [quickViewQuantity, setQuickViewQuantity] = useState(1);
@@ -182,7 +184,7 @@ export default function NewLaunches() {
                     style={{ msOverflowStyle: 'none', scrollbarWidth: 'none' }}
                 >
                     {newLaunches.map((item, index) => (
-                        <Link key={index} href={item.link} className="flex-shrink-0 w-[200px] lg:w-[250px] flex flex-col group cursor-pointer">
+                        <div key={index} onClick={(e) => openQuickView(e, item)} className="flex-shrink-0 w-[200px] lg:w-[250px] flex flex-col group cursor-pointer">
                             <div className="w-full h-[250px] border border-gray-200 rounded-xl flex items-center justify-center p-4 hover:shadow-lg hover:bg-white transition-all duration-300 mb-4 relative overflow-hidden group/card text-left">
                                 <Image
                                     src={item.image}
@@ -201,8 +203,15 @@ export default function NewLaunches() {
 
                                 {/* Action Buttons - Vertical Stack */}
                                 <div className="absolute top-12 right-2 flex flex-col gap-2 translate-x-14 group-hover/card:translate-x-0 transition-transform duration-300 z-10">
-                                    <button className="w-9 h-9 bg-[#a7358d] text-white rounded-full flex items-center justify-center hover:bg-[#8e2d78] transition-colors shadow-md" title="Add to Wishlist">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5">
+                                    <button
+                                        onClick={(e) => {
+                                            e.stopPropagation();
+                                            addToWishlist(item);
+                                        }}
+                                        className={`w-9 h-9 rounded-full flex items-center justify-center transition-colors shadow-md ${isInWishlist(item.id) ? 'bg-white text-[#a7358d]' : 'bg-[#a7358d] text-white hover:bg-[#8e2d78]'}`}
+                                        title="Add to Wishlist"
+                                    >
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill={isInWishlist(item.id) ? "currentColor" : "none"} viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5">
                                             <path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
                                         </svg>
                                     </button>
@@ -246,7 +255,7 @@ export default function NewLaunches() {
                                 <span className="text-[#f47779] font-bold text-[14px]">({item.discount})</span>
                             </div>
 
-                        </Link>
+                        </div>
                     ))}
                 </div>
 
@@ -334,11 +343,14 @@ export default function NewLaunches() {
                                 </div>
 
                                 <div className="flex gap-6 mt-auto text-[13px] text-gray-500 font-semibold uppercase tracking-wide">
-                                    <button className="flex items-center gap-2 hover:text-[#204983] transition-colors group">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5">
+                                    <button
+                                        onClick={() => addToWishlist(selectedProduct)}
+                                        className={`flex items-center gap-2 transition-colors group ${isInWishlist(selectedProduct.id) ? 'text-[#a7358d]' : 'hover:text-[#204983]'}`}
+                                    >
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill={isInWishlist(selectedProduct.id) ? "currentColor" : "none"} viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5">
                                             <path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
                                         </svg>
-                                        Add to Wish List
+                                        {isInWishlist(selectedProduct.id) ? 'Wishlisted' : 'Add to Wish List'}
                                     </button>
                                     <button className="flex items-center gap-2 hover:text-[#204983] transition-colors group">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5">
@@ -348,9 +360,7 @@ export default function NewLaunches() {
                                     </button>
                                 </div>
                                 <div className="mt-6 pt-6 border-t border-gray-100">
-                                    <Link href={selectedProduct.link} className="text-[#a7358d] font-bold text-[13px] uppercase hover:underline">
-                                        Go to Product
-                                    </Link>
+
                                 </div>
                             </div>
                         </div>

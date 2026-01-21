@@ -7,7 +7,6 @@ const categories = [
     { title: "Must haves", image: "https://cdn01.pharmeasy.in/dam/discovery/categoryImages/f10917087a483040b557e4b18204312c.png?f=png?dim=360x0" },
     { title: "Winter store", image: "https://cdn01.pharmeasy.in/dam/discovery/categoryImages/b862c2d54aa633c19765eb6cf2bd6660.png?f=png?dim=360x0" },
     { title: "Vitamin store", image: "https://cdn01.pharmeasy.in/dam/discovery/categoryImages/71ab5b001d2c3ef699d6661a1c583998.jpg?f=jpg?dim=360x0" },
-    { title: "Sexual wellness", image: "https://cdn01.pharmeasy.in/dam/discovery/categoryImages/23bec394cf943a83a0e946ded843a2a9.png?f=png?dim=360x0" },
     { title: "Personal care", image: "https://cdn01.pharmeasy.in/dam/discovery/categoryImages/6cbaa600864b3bd491d96834bfb0547e.png?f=png?dim=360x0" },
     { title: "Health concerns", image: "https://cdn01.pharmeasy.in/dam/discovery/categoryImages/5a4fa9318fbb3b7daa2cfa6d293bea87.png?f=png?dim=360x0" },
     { title: "Health food and drinks", image: "https://cdn01.pharmeasy.in/dam/discovery/categoryImages/6517ad5aaeca38e69936298d3e677a3a.png?f=png?dim=360x0" },

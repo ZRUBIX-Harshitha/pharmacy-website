@@ -20,11 +20,11 @@ export function CartProvider({ children }) {
             if (existingItem) {
                 return prevItems.map((item) =>
                     item.id === product.id
-                        ? { ...item, quantity: item.quantity + 1 }
+                        ? { ...item, quantity: item.quantity + (product.quantity || 1) } // Add standard 1 or product's quantity
                         : item
                 );
             }
-            return [...prevItems, { ...product, quantity: 1 }];
+            return [...prevItems, { ...product, quantity: product.quantity || 1 }]; // Use product quantity or default to 1
         });
     };
 
@@ -34,7 +34,7 @@ export function CartProvider({ children }) {
 
     const updateQuantity = (productId, newQuantity) => {
         if (newQuantity < 1) {
-            removeFromCart(productId);
+            // Prevent going below 1, user wants it to stay at 1
             return;
         }
         setCartItems((prevItems) =>

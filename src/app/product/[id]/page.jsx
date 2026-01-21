@@ -85,9 +85,9 @@ export default function ProductDetailsPage() {
         <div className="bg-white min-h-screen font-sans pb-20">
             {/* Breadcrumb */}
             <div className="max-w-[1400px] mx-auto px-4 lg:px-6 py-4 text-xs text-gray-500 flex gap-1">
-                <Link href="/home" className="hover:text-[#10847e]">Home</Link>
+                <Link href="/home" className="hover:text-[#a7358d]">Home</Link>
                 <span>&gt;</span>
-                <Link href="/healthcare" className="hover:text-[#10847e]">Healthcare</Link>
+                <Link href="/healthcare" className="hover:text-[#a7358d]">Healthcare</Link>
                 <span>&gt;</span>
                 <span className="text-gray-800 line-clamp-1 max-w-[300px]">{product.title}</span>
             </div>
@@ -119,7 +119,7 @@ export default function ProductDetailsPage() {
                                 <button
                                     key={idx}
                                     onClick={() => setSelectedImage(img)}
-                                    className={`w-16 h-16 border rounded-lg p-1 relative overflow-hidden flex-shrink-0 ${selectedImage === img ? 'border-[#10847e] ring-1 ring-[#10847e]' : 'border-gray-200 hover:border-gray-400'}`}
+                                    className={`w-16 h-16 border rounded-lg p-1 relative overflow-hidden flex-shrink-0 ${selectedImage === img ? 'border-[#a7358d] ring-1 ring-[#a7358d]' : 'border-gray-200 hover:border-gray-400'}`}
                                 >
                                     <Image
                                         src={img}
@@ -134,7 +134,7 @@ export default function ProductDetailsPage() {
                     </div>
                     <div className="mt-4 flex items-center gap-4 text-xs text-gray-500 justify-center">
                         <span>Non Returnable</span>
-                        <span className="text-[#10847e] font-semibold cursor-pointer">Read More</span>
+                        <span className="text-[#a7358d] font-semibold cursor-pointer">Read More</span>
                     </div>
                 </div>
 
@@ -144,7 +144,7 @@ export default function ProductDetailsPage() {
                         <h1 className="text-[22px] font-bold text-[#30363c] leading-snug mb-2">
                             {product.title}
                         </h1>
-                        <Link href="#" className="text-[#10847e] text-sm font-semibold hover:underline">
+                        <Link href="#" className="text-[#a7358d] text-sm font-semibold hover:underline">
                             Visit {product.store}
                         </Link>
                     </div>
@@ -153,7 +153,7 @@ export default function ProductDetailsPage() {
                         <span className="text-[28px] font-bold text-[#30363c]">{product.price}</span>
                         <div className="flex items-center gap-2">
                             <span className="text-gray-500 line-through text-sm">MRP {product.mrp}</span>
-                            <span className="bg-[#f2fff8] text-[#10847e] text-xs font-bold px-2 py-1 rounded-sm border border-[#10847e] border-dashed">
+                            <span className="bg-[#fdf2fa] text-[#a7358d] text-xs font-bold px-2 py-1 rounded-sm border border-[#a7358d] border-dashed">
                                 {product.discount}
                             </span>
                         </div>
@@ -173,7 +173,7 @@ export default function ProductDetailsPage() {
                         <h3 className="font-bold text-[#30363c] text-sm">Select Available Variant</h3>
                         <div>
                             <p className="text-xs text-gray-500 mb-2">Pack Size</p>
-                            <button className="border border-[#10847e] bg-[#f2fff8] text-[#10847e] font-bold py-2 px-6 rounded-md text-sm shadow-sm">
+                            <button className="border border-[#a7358d] bg-[#fdf2fa] text-[#a7358d] font-bold py-2 px-6 rounded-md text-sm shadow-sm">
                                 {packSize}
                             </button>
                         </div>
@@ -182,7 +182,7 @@ export default function ProductDetailsPage() {
                     <div className="pt-6">
                         <button
                             onClick={handleAddToCart}
-                            className="bg-[#10847e] hover:bg-[#0c6b66] text-white font-bold py-3 px-8 rounded-md shadow-md transition-colors w-full sm:w-auto text-[16px]"
+                            className="bg-[#a7358d] hover:bg-[#8e2d78] text-white font-bold py-3 px-8 rounded-md shadow-md transition-colors w-full sm:w-auto text-[16px]"
                         >
                             Add To Cart
                         </button>
@@ -198,7 +198,7 @@ export default function ProductDetailsPage() {
                         </div>
                         <button
                             onClick={openCart}
-                            className="w-full bg-[#10847e] hover:bg-[#0c6b66] text-white font-bold py-3 rounded-md flex items-center justify-center gap-2 transition-colors shadow-sm"
+                            className="w-full bg-[#a7358d] hover:bg-[#8e2d78] text-white font-bold py-3 rounded-md flex items-center justify-center gap-2 transition-colors shadow-sm"
                         >
                             View Cart
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-4 h-4">
@@ -234,7 +234,7 @@ export default function ProductDetailsPage() {
                             </div>
                             <div className="flex gap-3 items-start">
                                 <div className="shrink-0 w-6 mt-1">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 text-[#10847e]">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 text-[#a7358d]">
                                         <path strokeLinecap="round" strokeLinejoin="round" d="M9.568 3H5.25A2.25 2.25 0 0 0 3 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a2.25 2.25 0 0 0 .26-.17l4.5-4.5a2.25 2.25 0 0 0 .17-.26c.541-.827.369-1.908-.33-2.607L10.838 3.66a2.251 2.251 0 0 0-1.591-.659Z" />
                                         <path strokeLinecap="round" strokeLinejoin="round" d="M6 6h.008v.008H6V6Z" />
                                     </svg>
