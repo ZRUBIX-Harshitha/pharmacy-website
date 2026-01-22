@@ -47,7 +47,7 @@ export default function Header() {
                     {/* Logo & Location */}
                     <div className="flex items-center gap-8 shrink-0">
                         <div className="shrink-0 cursor-pointer flex items-center">
-                            <Link href="/home" className="flex items-center">
+                            <Link href="/pharmacy/home" className="flex items-center">
                                 <span className="text-3xl font-black tracking-tight">
                                     <span style={{ color: '#a7358d' }}>Zru</span>
                                     <span className="text-gray-800">bix</span>

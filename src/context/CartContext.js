@@ -7,12 +7,26 @@ export function CartProvider({ children }) {
     const [cartItems, setCartItems] = useState([]);
     const [isCartOpen, setIsCartOpen] = useState(false);
 
+    // Load from local storage on mount
+    useEffect(() => {
+        const savedCart = localStorage.getItem('cartItems');
+        if (savedCart) {
+            try {
+                setCartItems(JSON.parse(savedCart));
+            } catch (error) {
+                console.error("Failed to parse cart items", error);
+            }
+        }
+    }, []);
+
+    // Save to local storage whenever cart changes
+    useEffect(() => {
+        localStorage.setItem('cartItems', JSON.stringify(cartItems));
+    }, [cartItems]);
+
     const openCart = () => setIsCartOpen(true);
     const closeCart = () => setIsCartOpen(false);
     const toggleCart = () => setIsCartOpen((prev) => !prev);
-
-    // Load cart from local storage on mount (optional but good for UX)
-    // For now, starting empty as per request "starting la header cart la 0 irukanum"
 
     const addToCart = (product) => {
         setCartItems((prevItems) => {
@@ -20,11 +34,11 @@ export function CartProvider({ children }) {
             if (existingItem) {
                 return prevItems.map((item) =>
                     item.id === product.id
-                        ? { ...item, quantity: item.quantity + (product.quantity || 1) } // Add standard 1 or product's quantity
+                        ? { ...item, quantity: item.quantity + (product.quantity || 1) }
                         : item
                 );
             }
-            return [...prevItems, { ...product, quantity: product.quantity || 1 }]; // Use product quantity or default to 1
+            return [...prevItems, { ...product, quantity: product.quantity || 1 }];
         });
     };
 
@@ -44,6 +58,11 @@ export function CartProvider({ children }) {
         );
     };
 
+    const clearCart = () => {
+        setCartItems([]);
+        localStorage.removeItem('cartItems');
+    };
+
     const cartCount = cartItems.reduce((total, item) => total + item.quantity, 0);
 
     // Helper to parse price string to number (handling "₹" or commas)
@@ -58,7 +77,7 @@ export function CartProvider({ children }) {
     }, 0);
 
     return (
-        <CartContext.Provider value={{ cartItems, addToCart, removeFromCart, updateQuantity, cartCount, cartTotal, isCartOpen, openCart, closeCart, toggleCart }}>
+        <CartContext.Provider value={{ cartItems, addToCart, removeFromCart, updateQuantity, clearCart, cartCount, cartTotal, isCartOpen, openCart, closeCart, toggleCart }}>
             {children}
         </CartContext.Provider>
     );

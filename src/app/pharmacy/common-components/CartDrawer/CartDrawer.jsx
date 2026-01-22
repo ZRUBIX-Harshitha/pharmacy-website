@@ -40,36 +40,18 @@ export default function CartDrawer() {
                 {/* Cart Items List */}
                 <div className="flex-1 overflow-y-auto p-4 space-y-4">
                     {cartItems.length === 0 ? (
-                        <div className="h-full flex flex-col items-center justify-center text-center space-y-6 text-gray-500 animate-fadeIn">
-                            <div className="w-48 h-48 relative flex items-center justify-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" className="w-full h-full text-gray-200">
-                                    <circle cx="100" cy="100" r="80" fill="#f8f9fa" />
-                                    <path fill="#e9ecef" d="M100 180c-44.18 0-80-35.82-80-80s35.82-80 80-80 80 35.82 80 80-35.82 80-80 80z" />
-                                    <path fill="#dee2e6" d="M65 85h70l-10 60H75z" />
-                                    <path fill="#ced4da" d="M70 65h60v20H70z" />
-                                    <circle cx="80" cy="155" r="8" fill="#adb5bd" />
-                                    <circle cx="120" cy="155" r="8" fill="#adb5bd" />
-                                </svg>
-                                <div className="absolute inset-0 flex items-center justify-center">
-                                    <Image
-                                        src="https://assets.pharmeasy.in/web-assets/images/cart_empty_state.png?dim=256x0"
-                                        alt="Empty Cart"
-                                        width={200}
-                                        height={200}
-                                        className="object-contain drop-shadow-md"
-                                        unoptimized
-                                    />
-                                </div>
-                            </div>
+                        <div className="h-full flex flex-col items-center justify-center text-center p-8 animate-fadeIn">
 
-                            <div className="flex flex-col items-center gap-2">
-                                <h3 className="text-xl font-bold text-gray-800">Your Cart is Empty</h3>
-                                <p className="text-gray-500 max-w-[250px] leading-relaxed">Looks like you haven't added anything to your cart yet.</p>
-                            </div>
+                            <div className="w-16 h-1 bg-gray-100 rounded-full mb-8"></div>
+
+                            <h3 className="text-2xl font-bold text-gray-900 tracking-tight mb-3">Your Cart is Empty</h3>
+                            <p className="text-gray-500 text-sm leading-relaxed max-w-[240px] mb-10">
+                                Looks like you haven't made your choice yet.
+                            </p>
 
                             <button
                                 onClick={closeCart}
-                                className="mt-2 bg-[#a7358d] text-white px-8 py-3 rounded-lg font-bold hover:bg-[#8e2d78] transition-all shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
+                                className="w-full max-w-[200px] bg-[#30363c] hover:bg-black text-white py-3.5 rounded-xl font-bold text-[15px] shadow-[0_4px_14px_0_rgba(0,0,0,0.1)] transition-all transform hover:-translate-y-0.5 active:scale-95"
                             >
                                 Start Shopping
                             </button>
