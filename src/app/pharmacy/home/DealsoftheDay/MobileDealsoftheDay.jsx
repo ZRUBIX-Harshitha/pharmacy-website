@@ -3,6 +3,8 @@ import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useCart } from '../../../../context/CartContext';
+import { useWishlist } from '../../../../context/WishlistContext';
+import { FaHeart, FaRegHeart } from 'react-icons/fa';
 
 const products = [
     {
@@ -100,6 +102,7 @@ const products = [
 
 export default function MobileDealsoftheDay() {
     const { addToCart, openCart } = useCart();
+    const { addToWishlist, isInWishlist } = useWishlist();
 
     const handleAddToCart = (e, item) => {
         e.preventDefault();
@@ -108,51 +111,71 @@ export default function MobileDealsoftheDay() {
         openCart();
     };
 
+    const handleWishlist = (e, item) => {
+        e.preventDefault();
+        e.stopPropagation();
+        addToWishlist(item);
+    }
+
     return (
         <div className="py-6 px-4 font-sans border-b border-gray-100 bg-white">
             <h2 className="text-lg font-bold text-gray-800 mb-1 leading-tight">Deals of the Day</h2>
             <p className="text-gray-500 text-sm mb-4">Top products at best prices</p>
 
             <div className="flex overflow-x-auto gap-3 pb-4 scrollbar-hide -mx-4 px-4 no-scrollbar">
-                {products.map((item, index) => (
-                    <div key={index} className="flex-shrink-0 w-[160px] flex flex-col group relative">
-                        {/* Card Content */}
-                        <Link href={item.link} className="w-full h-[160px] border border-gray-100 rounded-xl flex items-center justify-center p-3 bg-white mb-2 relative">
-                            <Image
-                                src={item.image}
-                                alt={item.title}
-                                width={120}
-                                height={120}
-                                className="object-contain w-full h-full"
-                                unoptimized
-                            />
-                            {/* Discount */}
-                            <div className="absolute top-2 right-2 bg-[#a7358d] text-white text-[10px] font-bold px-1.5 py-0.5 rounded">
-                                -{item.discount}
-                            </div>
-                        </Link>
+                {products.map((item, index) => {
+                    const isWishlisted = isInWishlist(item.id);
+                    return (
+                        <div key={index} className="flex-shrink-0 w-[160px] flex flex-col group relative">
+                            {/* Card Content */}
+                            <Link href={item.link} className="w-full h-[160px] border border-gray-100 rounded-xl flex items-center justify-center p-3 bg-white mb-2 relative">
+                                <Image
+                                    src={item.image}
+                                    alt={item.title}
+                                    width={120}
+                                    height={120}
+                                    className="object-contain w-full h-full"
+                                    unoptimized
+                                />
+                                {/* Discount (Moved to Left) */}
+                                <div className="absolute top-2 left-2 bg-[#a7358d] text-white text-[10px] font-bold px-1.5 py-0.5 rounded">
+                                    -{item.discount}
+                                </div>
+                                {/* Wishlist Button (Moved to Right, Professional Style) */}
+                                <button
+                                    onClick={(e) => handleWishlist(e, item)}
+                                    className="absolute top-2 right-2 p-1.5 rounded-full bg-white border border-gray-100 shadow-md hover:scale-110 active:scale-95 transition-all z-10"
+                                >
+                                    {isWishlisted ? (
+                                        <FaHeart className="text-[#a7358d] text-xs" />
+                                    ) : (
+                                        <FaRegHeart className="text-gray-400 text-xs" />
+                                    )}
+                                </button>
+                            </Link>
 
-                        {/* Details */}
-                        <div className="flex flex-col flex-1">
-                            <h3 className="text-gray-700 font-medium text-sm mb-1 line-clamp-2 min-h-[40px] leading-snug">{item.title}</h3>
-                            <div className="flex gap-2 items-center text-xs text-gray-500 mb-0.5">
-                                <span>MRP</span>
-                                <span className="line-through">{item.mrp}</span>
-                            </div>
-                            <div className="flex gap-2 items-center text-sm font-bold text-gray-800 mb-3">
-                                {item.price}
-                            </div>
+                            {/* Details */}
+                            <div className="flex flex-col flex-1">
+                                <h3 className="text-gray-700 font-medium text-sm mb-1 line-clamp-2 min-h-[40px] leading-snug">{item.title}</h3>
+                                <div className="flex gap-2 items-center text-xs text-gray-500 mb-0.5">
+                                    <span>MRP</span>
+                                    <span className="line-through">{item.mrp}</span>
+                                </div>
+                                <div className="flex gap-2 items-center text-sm font-bold text-gray-800 mb-3">
+                                    {item.price}
+                                </div>
 
-                            {/* Add to Cart Button */}
-                            <button
-                                onClick={(e) => handleAddToCart(e, item)}
-                                className="w-full bg-[#fdf2fa] text-[#a7358d] border border-[#fdf2fa] active:bg-[#a7358d] active:text-white font-bold py-2 rounded-lg text-xs uppercase tracking-wide transition-colors mt-auto"
-                            >
-                                Add
-                            </button>
+                                {/* Add to Cart Button */}
+                                <button
+                                    onClick={(e) => handleAddToCart(e, item)}
+                                    className="w-full bg-[#fdf2fa] text-[#a7358d] border border-[#fdf2fa] active:bg-[#a7358d] active:text-white font-bold py-2 rounded-lg text-xs uppercase tracking-wide transition-colors mt-auto"
+                                >
+                                    Add
+                                </button>
+                            </div>
                         </div>
-                    </div>
-                ))}
+                    );
+                })}
             </div>
         </div>
     );

@@ -4,6 +4,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import { useCart } from '../../../context/CartContext';
+import useMediaQuery from '@/hooks/useIsDesktop';
+import MobileProductPage from './MobileProductPage';
 
 // Mock Data matching New Launches for demo purposes
 // In a real app, this would be fetched via API based on 'id'
@@ -55,17 +57,25 @@ const productsDB = {
     }
 };
 
+// Main Component with Responsive Switching
 export default function ProductDetailsPage() {
+    const isMobile = useMediaQuery("(max-width: 768px)");
+
+    if (isMobile) {
+        return <MobileProductPage />;
+    }
+
+    return <DesktopProductContent />;
+}
+
+// Separated Desktop Component (Original Code moved here)
+function DesktopProductContent() {
     const params = useParams();
     const { id } = params;
     const { addToCart, cartCount, openCart } = useCart();
+
     // Use fallback if ID not found in mock DB
     const product = productsDB[id] || productsDB["default"];
-
-    // Fallback product might need title adjustment if it was purely default
-    if (!productsDB[id] && id) {
-        // Just for demo, keeping the default one but maybe log it
-    }
 
     const [selectedImage, setSelectedImage] = useState(product.images[0]);
     const [packSize, setPackSize] = useState("60 Units");

@@ -5,6 +5,8 @@ import Link from 'next/link';
 import { useCart } from '../../context/CartContext';
 import Header from '../pharmacy/common-components/Header/Header';
 import Footer from '../pharmacy/common-components/Footer/Footer';
+import useMediaQuery from '@/hooks/useIsDesktop';
+import MobileCartPage from './MobileCartPage';
 
 // --- Components ---
 
@@ -104,7 +106,19 @@ const recommendedProducts = [
     }
 ];
 
+// Main Component with Responsive Switching
 export default function CartPage() {
+    const isMobile = useMediaQuery("(max-width: 768px)");
+
+    if (isMobile) {
+        return <MobileCartPage />;
+    }
+
+    return <DesktopCartContent />;
+}
+
+// Renamed original component for desktop
+function DesktopCartContent() {
     const { cartItems, removeFromCart, updateQuantity, cartTotal, cartCount, addToCart, clearCart } = useCart();
     const [viewState, setViewState] = useState('CART'); // CART, ADDRESS, PAYMENT, SUCCESS
     const [savedAddress, setSavedAddress] = useState(null);
