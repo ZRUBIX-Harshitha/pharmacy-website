@@ -132,7 +132,7 @@ export default function MobileHeroSection() {
                                 src={url}
                                 alt={`Banner ${index + 1}`}
                                 fill
-                                className="object-cover"
+                                className="object-fill"
                                 unoptimized
                             />
                         </div>
